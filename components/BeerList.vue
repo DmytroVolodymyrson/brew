@@ -1,13 +1,13 @@
 <template></template>
 
 <script setup lang="ts">
-import { withDefaults } from 'vue'
+import { withDefaults } from "vue";
 
 interface Properties {
-  beers: Beer[]
+  beers: Beer[];
 }
 
 withDefaults(defineProps<Properties>(), {
   beers: () => [],
-})
+});
 </script>
