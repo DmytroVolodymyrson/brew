@@ -6,8 +6,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint:js": "./node_modules/.bin/eslint --max-warnings=0 --ignore-path .gitignore . --fix",
-    "fix:js": "npm run lint:js "
+    "lint:js": "./node_modules/.bin/eslint --max-warnings=0 --ignore-path .gitignore . --fix"
   },
   "dependencies": {
     "@vueuse/nuxt": "^10.1.2",

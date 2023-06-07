@@ -8,7 +8,7 @@
         :src="beer.image_url"
         height="200"
         width="200"
-        alt="beer"
+        :alt="beer.name"
         class="aspect-[47/183] h-full w-full object-contain xl:w-full"
       />
     </NuxtLink>
@@ -29,7 +29,7 @@
     </div>
     <div
       v-if="containsLactose"
-      class="tooltip tooltip-left absolute right-0 top-0 rounded-full bg-warning p-1 sm:tooltip-bottom sm:translate-x-1/2 xl:top-4"
+      class="tooltip tooltip-left absolute right-0 top-0 z-10 rounded-full bg-warning p-1 sm:tooltip-bottom"
       data-tip="Contains Lactose"
     >
       <CowIcon class="text-2xl text-white" />
@@ -72,5 +72,7 @@ const containsLactose = computed(() => {
       }
     }
   }
+
+  return beer.value.method.twist?.toLowerCase().includes(lactoseString)
 })
 </script>

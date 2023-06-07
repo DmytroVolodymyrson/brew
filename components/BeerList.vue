@@ -4,7 +4,7 @@
       <BeerCard :beer="beer" />
     </li>
   </ul>
-  <div v-else class="alert alert-info justify-start">
+  <div v-else class="alert alert-info w-full justify-start">
     <IconInfo class="text-2xl" />
     <span>No beers found :(</span>
   </div>

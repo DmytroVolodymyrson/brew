@@ -3,7 +3,7 @@
     <h1 class="text-center text-4xl font-bold sm:text-5xl">Craft Beer Collection</h1>
     <div ref="beersListReference">
       <BeerList :beers="beersList" />
-      {{ beersPending }}
+      <TheLoading v-show="beersPending" class="mx-auto mt-4 h-10 w-10" />
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@ const beersList = ref<Beer[]>([])
 const beersListReference = ref()
 const currentPage = ref(1)
 const itemsPerPage = ref(20)
-const nextPageAvailableToLoad = ref(true)
+const isNextPageAvailable = ref(true)
 
 const { getAllBeers } = useBeer()
 
@@ -32,23 +32,27 @@ const {
   data: beersResponse,
   pending: beersPending,
   error: beersFetchError,
+  refresh: loadMoreBeers,
 } = await getAllBeers({
   params: beerRequestParameters,
   transform(data) {
     return data.sort(sortBeersByABV)
   },
+  watch: false,
 })
 
 if (beersResponse.value && beersResponse.value.length > 0 && !beersFetchError.value) {
   beersList.value = beersResponse.value.filter((beer) => filterBeersWithCentennialHops(beer))
 }
 
-watch(beersResponse, async () => {
+watch(currentPage, async () => {
+  await loadMoreBeers()
+
   if (beersResponse.value && beersResponse.value.length > 0 && !beersFetchError.value) {
     beersList.value.push(...beersResponse.value.filter((beer) => filterBeersWithCentennialHops(beer)))
 
     if (beersResponse.value.length < itemsPerPage.value) {
-      nextPageAvailableToLoad.value = false
+      isNextPageAvailable.value = false
     }
   }
 })
@@ -63,7 +67,7 @@ function filterBeersWithCentennialHops(beer: Beer) {
 
 function handleScroll() {
   if (beersListReference.value.getBoundingClientRect().bottom < window.innerHeight) {
-    if (!nextPageAvailableToLoad.value) {
+    if (!isNextPageAvailable.value) {
       return
     }
 
@@ -75,5 +79,9 @@ const debouncedHandleScroll = useDebounceFn(handleScroll, 500)
 
 onMounted(() => {
   window.addEventListener('scroll', debouncedHandleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', debouncedHandleScroll)
 })
 </script>
