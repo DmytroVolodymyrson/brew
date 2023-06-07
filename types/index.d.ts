@@ -88,7 +88,3 @@ interface BeerApiParameters {
   page?: number
   per_page?: number
 }
-
-type BeerFetchOptions = {
-  params?: SearchParams | BeerApiParameters
-} & Omit<UseFetchOptions<Beer[]>, 'params'>

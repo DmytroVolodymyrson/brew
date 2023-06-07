@@ -10,6 +10,7 @@
     "fix:js": "npm run lint:js "
   },
   "dependencies": {
+    "@vueuse/nuxt": "^10.1.2",
     "daisyui": "^2.52.0",
     "nuxt": "^3.5.2",
     "typescript": "^4.9.5"
