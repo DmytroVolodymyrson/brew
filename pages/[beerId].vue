@@ -159,7 +159,7 @@
         <p>{{ beer.brewers_tips }}</p>
       </div>
     </div>
-    <NuxtLink to="/" class="btn-primary btn">Go Back</NuxtLink>
+    <NuxtLink to="/" class="btn-primary btn mx-4 md:mx-0">Go Back</NuxtLink>
   </div>
 </template>
 
@@ -182,6 +182,4 @@ if (!beerResponse.value || beerResponse.value.length === 0 || error.value) {
 const beer = ref<Beer>(beerResponse.value[0])
 
 const mashIsMoreThanOneStep = computed(() => beer.value.method.mash_temp.length > 1)
-
-console.log(beer.value)
 </script>
