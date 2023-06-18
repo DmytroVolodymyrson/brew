@@ -1,6 +1,6 @@
 #Demo
 
-brew-sepia.vercel.app
+[brew.app]([brew-sepia.vercel.app](https://brew-sepia.vercel.app/))
 
 # Nuxt 3 Minimal Starter
 
